@@ -1,9 +1,17 @@
 var express = require('express'),
+	nunjucks = require("nunjucks"),
 	passportModule = require('passport').Passport,
 	passportLocalStrategy = require('./passport-local').Strategy;
 
+// broad configuration directives
+
+var PORT= 4004
+
+
+// build passport module
+
 var passport = new passportModule()
-passport.use("local", new passportLocalStrategy()); // TODO: define a login strategy
+//passport.use("local", new passportLocalStrategy()); // TODO: define a login strategy
 
 
 var app= express()
@@ -24,14 +32,29 @@ app.configure(function() {
 	app.use(express.static(__dirname + '/public'));
 });
 
+nunjucks.configure('views', { autoescape: true, express: app });
+
+//app.use(function(req, res, next) {
+//    res.locals.hello = 'world';
+//    next();
+//});
+
+app.get('/hello', function(req, res) {
+    res.render('hello.html', { username: 'James Long <strong>copyright</strong>' });
+});
+
+//app.get('/about', function(req, res) {
+//    res.render('about.html');
+//});
+
 
 app.get('/', function(req, res){
 	res.render('index', { user: req.user });
 });
 
-app.get('/account', ensureAuthenticated, function(req, res){
-	res.render('account', { user: req.user });
-});
+//app.get('/account', ensureAuthenticated, function(req, res){
+//	res.render('account', { user: req.user });
+//});
 
 app.get('/login', function(req, res){
 	res.render('login', { user: req.user, message: req.flash('error') });
@@ -74,19 +97,15 @@ app.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
-app.listen(3000, function() {
-	console.log('Express server listening on port 3000');
-});
-
 
 
 app.get('/', function(req, res){
 	res.render('index', { user: req.user });
 });
 
-app.get('/account', ensureAuthenticated, function(req, res){
-	res.render('account', { user: req.user });
-});
+//app.get('/account', ensureAuthenticated, function(req, res){
+//	res.render('account', { user: req.user });
+//});
 
 app.get('/login', function(req, res){
 	res.render('login', { user: req.user, message: req.flash('error') });
@@ -106,6 +125,14 @@ app.post('/login',
 	});
 
 
-app.post("/login", passort.authenticate('local', { failureRedirect: '/unauth' }, function(req,res) {
+app.post("/login", passport.authenticate('local', { failureRedirect: '/unauth' }, function(req,res) {
 	req.passedport= true
 }))
+
+
+
+app.listen(PORT, function() {
+	console.log('Express server listening on port '+PORT);
+});
+
+
