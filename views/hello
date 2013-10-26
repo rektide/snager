@@ -1,0 +1,11 @@
+{% extends "base" %}
+
+{% block deps %}
+{% include "deps/leaflet" %}
+{% endblock %}
+
+{% block content %}
+Hello, welcome to RS! user:{{user}} username:{{username}}
+
+{% include "frags/leafmap" %}
+{% endblock %}
