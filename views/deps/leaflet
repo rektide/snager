@@ -1,2 +1,5 @@
-<link rel="stylesheet" href="/leaflet/leaflet.css" />
+<link rel="stylesheet" href="/leaflet/leaflet.css"/>
 <script src="/leaflet/leaflet.js"></script>
+
+<link rel="stylesheet" href="/leaflet-fullscreen/leaflet.fullscreen.css"/>
+<script src="/leaflet-fullscreen/leaflet.fullscreen.js"></script>
