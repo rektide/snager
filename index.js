@@ -1,6 +1,6 @@
 var express = require('express'),
 	passport = require('passport'),
-	passportLocalStrategy = require('passport-local').Strategy;
+	passportLocalStrategy = require('./passport-local').Strategy;
 
 var passport = new Passport()
 passport.use("local", passportLocal); // TODO: define a login strategy
