@@ -22,3 +22,17 @@ CREATE TABLE catches(id, user_id, pitch_id);
 CREATE TABLE users(???);
 CREATE TABLE locations(???);
 
+
+
+# Schema Creation
+
+sudo -u postgres psql
+CREATE USER ridemaster WITH PASSWORD 'h00plaf00';
+CREATE TABLESPACE ridetablespace OWNER ridemaster LOCATION '/srv/db-ridesnag';
+CREATE DATABASE ridedb OWNER ridemaster TABLESPACE ridetablespace;
+\c ridedb
+CREATE TABLE "user" (id int primary key, name text);
+CREATE TABLE trip (id int primary key, owner int);
+
+CREATE USER rideapp WITH PASSWORD 'h00plaf00';
+GRANT ALL PRIVILEGES ON DATABASE ridedb TO rideapp;
