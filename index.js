@@ -1,7 +1,9 @@
 var express = require('express'),
 	nunjucks = require("nunjucks"),
 	passportModule = require('passport').Passport,
-	passportLocalStrategy = require('./passport-local').Strategy
+        passportLocalStrategy = require('./passport-local').Strategy
+
+var bookshelf = require('bookshelf')
 
 
 //
@@ -48,7 +50,7 @@ app.configure(function() {
 //   the request will proceed.  Otherwise, the user will be redirected to the
 //   login page.
 function ensureAuthenticated(req, res, next) {
-	if (req.isAuthenticated()) { return next(); }
+	if (req.isAuthenticated()) { return next() }
 	res.redirect('/login')
 }
 
@@ -56,6 +58,67 @@ function ensureAuthenticated(req, res, next) {
 // configure nunjucks as view engine
 nunjucks.configure('views', { autoescape: true, express: app })
 
+// initialize bookshelf
+var orm = bookshelf.initialize({
+    client: 'pg',
+    connection: {
+	host: '127.0.0.1',
+	user: 'ridesnag',
+	password: 'password5352',
+	database: 'ridesnag_test',
+	charset: 'utf8'
+    },
+    debug: true
+})
+
+var User = orm.Model.extend({
+    tableName: 'user',
+    idAttribute: 'id', // TODO: necessary?
+    trips: function () {
+	return this.hasMany(Trip)
+    }
+})
+
+var Trip = orm.Model.extend({
+    tableName: 'trip',
+    idAttribute: 'id', // TODO: necessary?
+    owner: function () {
+	return this.hasOne(User)
+    },
+    start: function () {
+	return this.hasOne(Meet, 'start_id')
+    },
+    destination: function () {
+	return this.hasOne(Meet, 'destination_id')
+    },
+    matches: function () {
+	return this.hasOne(Trip, 'matches_with')
+    },
+})
+
+var Meet = orm.Model.extend({
+    tableName: 'meet',
+    idAttribute: 'id' // TODO: necessary?
+})
+
+
+// user looks at their personalized homepage, sees the trips they are/were associated with
+// select * from `user`, `trip` where name = 'bob'
+//console.log('selecting bob')
+//new User({name: 'bob'}).fetch({
+//    withRelated: ['trips.start', 'trips.destination'],
+//    require: true
+//}).then(function (model) {
+//  console.log(JSON.stringify(model))
+//})
+//console.log('done selecting bob')
+
+// user looks at all trips
+// future work: filter by near to A
+// future work: filter by upcoming
+// future work: filter by going near B
+
+// user 
 
 //
 // endpoints
