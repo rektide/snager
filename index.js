@@ -41,7 +41,7 @@ app.configure(function() {
 	app.use(express.static(__dirname + '/public'))
 
 	// CONTROLLED ASSETS ONLY
-	app.use(ensureAuthenticated)
+	//app.use(ensureAuthenticated)
 })
 
 // Simple route middleware filter to ensure user is authenticated.
@@ -126,7 +126,7 @@ var Meet = orm.Model.extend({
 
 app.get('/hello', function(req, res) {
 	res.locals.user= "matt"
-	res.render('hello.html', { username: 'mfowle' })
+	res.render('hello', { username: 'mfowle' })
 })
 
 app.get('/', function(req, res){

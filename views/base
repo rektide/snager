@@ -13,11 +13,13 @@
 				font-size: .75em;
 			}
 		</style>
-
-		<script src="/js/nunjucks.js"></script>
-		<script src="/js/templates.js"></script>
+		<script src="/nunjucks/nunjucks.js"></script>
+		<script src="/templates.js"></script>
 	</head>
 	<body>
+		<!-- deps -->
+		{% block deps %}{% endblock %}
+		<!-- content -->
 		{% block content %}{% endblock %}
 
 		<div class="footer">
