@@ -3,7 +3,10 @@ var express = require('express'),
 	passportModule = require('passport').Passport,
 	passportLocalStrategy = require('./passport-local').Strategy
 
-// broad configuration directives
+
+//
+// broad configuration directives //
+//
 
 var PORT= 4004
 
@@ -13,6 +16,10 @@ var PORT= 4004
 var passport = new passportModule()
 //passport.use("local", new passportLocalStrategy()) // TODO: define a login strategy
 
+
+//
+// build express
+//
 
 var app= express()
 app.configure(function() {
@@ -30,35 +37,41 @@ app.configure(function() {
 	app.use(passport.session())
 	//app.use(app.router) // TODO: build an application
 	app.use(express.static(__dirname + '/public'))
+
+	// CONTROLLED ASSETS ONLY
+	app.use(ensureAuthenticated)
 })
 
+// Simple route middleware filter to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) { return next(); }
+	res.redirect('/login')
+}
+
+
+// configure nunjucks as view engine
 nunjucks.configure('views', { autoescape: true, express: app })
 
-//app.use(function(req, res, next) {
-//	res.locals.hello = 'world'
-//	next()
-//})
+
+//
+// endpoints
+//
 
 app.get('/hello', function(req, res) {
 	res.locals.user= "matt"
 	res.render('hello.html', { username: 'mfowle' })
 })
 
-//app.get('/about', function(req, res) {
-//	res.render('about.html')
-//})
-
-
 app.get('/', function(req, res){
-	res.render('index', { user: req.user })
+	res.render('index', { user: req.user }) // TODO: have passport seed this information
 })
 
-//app.get('/account', ensureAuthenticated, function(req, res){
-//	res.render('account', { user: req.user })
-//})
-
-app.get('/login', function(req, res){
-	res.render('login', { user: req.user, message: req.flash('error') })
+app.get('/account', function(req, res){
+	res.render('account', { user: req.user })
 })
 
 // POST /login
@@ -99,41 +112,6 @@ app.get('/logout', function(req, res){
 })
 
 
-
-app.get('/', function(req, res){
-	res.render('index', { user: req.user })
-})
-
-//app.get('/account', ensureAuthenticated, function(req, res){
-//	res.render('account', { user: req.user })
-//})
-
-app.get('/login', function(req, res){
-	res.render('login', { user: req.user, message: req.flash('error') })
-})
-
-// POST /login
-//	 Use passport.authenticate() as route middleware to authenticate the
-//	 request.	If authentication fails, the user will be redirected back to the
-//	 login page.	Otherwise, the primary route function function will be called,
-//	 which, in this example, will redirect the user to the home page.
-//
-//	 curl -v -d "username=bob&password=secret" http://127.0.0.1:3000/login
-app.post('/login', 
-	passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-	function(req, res) {
-		res.redirect('/')
-	})
-
-
-app.post("/login", passport.authenticate('local', { failureRedirect: '/unauth' }, function(req,res) {
-	req.passedport= true
-}))
-
-
-
 app.listen(PORT, function() {
 	console.log('Express server listening on port '+PORT)
 })
-
-

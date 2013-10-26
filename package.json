@@ -21,6 +21,7 @@
 		"express": "~3.4.3",
 		"passport": "~0.1.17",
 		"nunjucks": "~1.0.0",
-		"passport-local": "~0.1.6"
+		"passport-local": "~0.1.6",
+		"leaflet": "~0.6.4"
 	}
 }
