@@ -1,6 +1,6 @@
-var express = require('express')
-	, passport = require('passport')
-	, LocalStrategy = require('passport-local').Strategy;
+var express = require('express'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 	
 
 var users = [
