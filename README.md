@@ -22,4 +22,3 @@ CREATE TABLE catches(id, user_id, pitch_id);
 CREATE TABLE users(???);
 CREATE TABLE locations(???);
 
->>>>>>> Sketch a possible database shape
