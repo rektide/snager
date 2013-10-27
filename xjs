@@ -1,0 +1,2 @@
+#!/bin/sh
+ls *.js **/*.js|grep -v node_modules
