@@ -129,6 +129,11 @@ app.get('/hello', function(req, res) {
 	res.render('hello', { username: 'mfowle' })
 })
 
+app.get('/home', function(req, res) {
+	res.locals.user= "matt"
+	res.render('home', { username: 'mfowle' })
+})
+
 app.get('/', function(req, res){
 	res.render('index', { user: req.user }) // TODO: have passport seed this information
 })

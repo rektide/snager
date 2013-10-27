@@ -1,15 +1,9 @@
 {% extends "base" %}
 
-{% block deps %}
-{% include "deps/leaflet" %}
-{% endblock %}
-
 {% block content %}
 
 
-<head
-<link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'> 
-<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic' rel='stylesheet' type='text/css'>
+<head>
 
 </head>
 
@@ -19,7 +13,7 @@
  <p id="subheading">   Where are we headed?</p>
 <form>
 <input type="text" name="search" style="height:25px;font-size:14pt;" >
-    <input id= "button" type="image" src="http://s24.postimg.org/6tb7jam0h/search.png" name="image" width="30" height="30">
+    <input id= "button" type="image" src="img/search.png" name="image" width="30" height="30">
     </input>
 </form>
 
@@ -27,3 +21,56 @@ user:{{user}} username:{{username}}
 
 {% include "frags/leafmap" %}
 {% endblock %}
+
+
+{% block deps %}
+{% include "deps/leaflet" %}
+{% include "frag/geopos" %}
+{% endblock %}
+
+{% block heads %}
+<link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'> 
+<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic' rel='stylesheet' type='text/css'>
+
+		<style>
+body {
+   background-image:url('img/img_9481.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+background-color:#cccccc;
+ 
+}
+form
+{
+    
+position:absolute;
+left:50%;
+top:50%;
+    
+}
+#heading {
+    position:absolute;
+    left:48%;
+    top:34%;
+    font-size:2.5em;
+    font-family:'Arvo', serif; 
+}
+#subheading
+{
+position:absolute;
+left:50%;
+top:40%;
+font-family: 'Vollkorn', serif; 
+    font-size:2.25em;
+}
+#button
+{
+position:relative;
+left:-7px;
+top:10px;    
+}
+		</style>
+{% include "frag/mobile-viewlock" %}
+{% endblock %}
+
+
