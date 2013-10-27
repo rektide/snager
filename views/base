@@ -15,6 +15,7 @@
 		</style>
 		<script src="/nunjucks/nunjucks.js"></script>
 		<script src="/templates.js"></script>
+		{% block heads %}{% endblock %}
 	</head>
 	<body>
 		<!-- deps -->
