@@ -1,15 +1,16 @@
-var express = require('express'),
-  passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy
+var express= require("express"),
+  passport= require("passport"),
+  when= require("when"),
+  LocalStrategy = require("passport-local").Strategy
 
 var bookshelf= require("./bookshelf")
 
 function findById(id, fn) {
-	return bookshelf.User.get({id: id}).fetch({withRelated: bookshelf.WITH_RELATED.User})
+	return new bookshelf.User({id: id}).fetch({withRelated: bookshelf.WITH_RELATED.User})
 }
 
 function findByUsername(username, fn) {
-	return bookshelf.User.get({username: username}).fetch({withRelated: bookshelf.WITH_RELATED.User})
+	return new bookshelf.User({username: username}).fetch({withRelated: bookshelf.WITH_RELATED.User})
 }
 
 
