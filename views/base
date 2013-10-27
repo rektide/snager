@@ -3,7 +3,6 @@
 	<head>
 		<title>A quick app</title>
 
-
 		<script src="/nunjucks/nunjucks.js"></script>
 		<script src="/templates.js"></script>
 		{% block heads %}{% endblock %}
