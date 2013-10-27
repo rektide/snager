@@ -5,11 +5,17 @@ var express= require("express"),
 
 var bookshelf= require("./bookshelf")
 
-function findById(id, fn) {
+function log(){
+	console.log.apply(console,arguments)
+}
+
+function findById(id) {
+	console.log("FIND BY ID", id)
 	return new bookshelf.User({id: id}).fetch({withRelated: bookshelf.WITH_RELATED.User})
 }
 
-function findByUsername(username, fn) {
+function findByUsername(username) {
+	console.log("FIND BY USER",!!username)
 	return new bookshelf.User({username: username}).fetch({withRelated: bookshelf.WITH_RELATED.User})
 }
 
@@ -20,20 +26,24 @@ function findByUsername(username, fn) {
 //	 this will be as simple as storing the user ID when serializing, and finding
 //	 the user by ID when deserializing.
 passport.serializeUser(function(user, done) {
+	console.log("SER",user&&user.id)
 	done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
+	console.log("DESER",id)
 	whenWhenThenNode(findById(id), done)	
 });
 
 function whenWhenThenNode(w,done){
-	when(w).then(_deglom1,done)
+	when(w).then(_deglom1(done),done)
 }
 
 function _deglom1(fn){
 	return function(data){
+		console.log("GLOM")
 		fn(null,data)
+		console.log("DONEGLOM")
 	}
 }
 
@@ -51,7 +61,14 @@ module.exports= function(){
 			// username, or the password is not correct, set the user to `false` to
 			// indicate failure and set a flash message.	Otherwise, return the
 			// authenticated `user`.
-			whenWhenThenNode(findByUsername(username), done)
+			when(findByUsername(username)).then(function(data){
+				if(data.get("pass") != password){
+					done("bad data")
+				}
+				done(null, data)
+			}, function(err){
+				done(err)
+			})
 		}
 	)
 }
