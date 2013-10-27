@@ -1,77 +1,25 @@
-{% extends "base" %}
+{% extends "base" %}{# this file extends base's form #}
 
-{% block content %}
-
-
-<head>
-
-</head>
-
-<font color="white">
-
-    <p id = "heading"> Ridesnag <br> </p>
- <p id="subheading">   Where are we headed?</p>
-<form>
-<input type="text" name="search" style="height:25px;font-size:14pt;" >
-    <input id= "button" type="image" src="img/search.png" name="image" width="30" height="30">
-    </input>
-</form>
-
-user:{{user}} username:{{username}}
-
-{% include "frags/leafmap" %}
-{% endblock %}
-
-
-{% block deps %}
-{% include "deps/leaflet" %}
-{% include "frags/geopos" %}
-{% endblock %}
-
-{% block heads %}
+{% block heads %}{# this file adds this to HEAD #}
 <link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'> 
 <link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic' rel='stylesheet' type='text/css'>
-
-		<style>
-body {
-   background-image:url('img/img_9481.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
-background-color:#cccccc;
- 
-}
-form
-{
-    
-position:absolute;
-left:50%;
-top:50%;
-    
-}
-#heading {
-    position:absolute;
-    left:48%;
-    top:34%;
-    font-size:2.5em;
-    font-family:'Arvo', serif; 
-}
-#subheading
-{
-position:absolute;
-left:50%;
-top:40%;
-font-family: 'Vollkorn', serif; 
-    font-size:2.25em;
-}
-#button
-{
-position:relative;
-left:-7px;
-top:10px;    
-}
-		</style>
-{% include "frag/mobile-viewlock" %}
-
+{% include "frags/mobile-viewlock" %}
 {% endblock %}
 
+{% block deps %}{# this file has non-blocking, non-rendering initialization code immediately after BODY #}
+{% include "deps/leaflet" %}
+{% include "frags/geopos" %}
+{% include "frags/style" %}
+{% endblock %}
 
+{% block content %}{# the bulk of BODY is defined here #}
+<font color="white">
+	<p id = "heading">Ridesnag<br/></p>
+	<p id="subheading">Where are we headed?</p>
+	<form>
+		<input type="text" name="search" style="height:25px;font-size:14pt;"></input>
+		<input id="button" type="image" src="/img/search.png" name="image" width="30" height="30"></input>
+	</form>
+</font>
+{% include "frags/leafmap" %}
+{% endblock %}

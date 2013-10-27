@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>A quick app</title>
+<head>
+	<title>RS</title>
+	{% block heads %}{% endblock %}
+</head>
+<body>
 
-		<script src="/nunjucks/nunjucks.js"></script>
-		<script src="/templates.js"></script>
-		{% block heads %}{% endblock %}
+	<!-- base here includes this hacked attempt at getting a footer. not successful. -->
+	<!-- http://stackoverflow.com/a/689290/72070 -->
+	<style>
+#body {
+	height: 100%;
+	min-height: 100%;
+}
+#footer {
+	 clear: both;
+	 position: relative;
+	 z-index: 10;
+	 height: 3em;
+	 margin-top: -3em;
+}
 
-	</head>
-	<body>
-		<!-- deps -->
-		{% block deps %}{% endblock %}
-		<!-- content -->
+	</style>
+	{% block deps %}{% endblock %}
+
+	<div id="body">
 		{% block content %}{% endblock %}
+		<div style="clear:both;"/>
+	</div>
 
-		<div class="footer">
-			{% block footer %}(c) RideSnag 2013{% endblock %}
-		</div>
-	</body>
+	<div id="footer">
+		{% block footer %}<!-- (c) RideSnag 2013 -->{% endblock %}
+	</div>
+</body>
 </html>
