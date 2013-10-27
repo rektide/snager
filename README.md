@@ -24,18 +24,22 @@ CREATE TABLE users(???);
 CREATE TABLE locations(???);
 ```
 
+# PostgreSQL
 
-# Schema Creation
+## postgresql.conf
+
+`listen_addresses='*'` for external access
+
+## pg_hba.conf
 
 ```
-sudo -u postgres psql
-CREATE USER ridemaster WITH PASSWORD 'h00plaf00';
-CREATE TABLESPACE ridetablespace OWNER ridemaster LOCATION '/srv/db-ridesnag';
-CREATE DATABASE ridedb OWNER ridemaster TABLESPACE ridetablespace;
-\c ridedb
-CREATE TABLE "user" (id int primary key, name text);
-CREATE TABLE trip (id int primary key, owner int);
-
-CREATE USER rideapp WITH PASSWORD 'h00plaf00';
-GRANT ALL PRIVILEGES ON DATABASE ridedb TO rideapp;
+host    ridedb_test     all             0.0.0.0/0               md5
+host    ridedb          all             0.0.0.0/0               md5
 ```
+
+For external addresses to those databases.
+
+
+## Db initialization
+
+`sudo -u postgres psql` gets in. Use scripts in `schema.sql` file to init.
