@@ -2,10 +2,6 @@
 <html>
 <head>
 	<title>RS</title>
-	{% block heads %}{% endblock %}
-</head>
-<body>
-
 	<!-- base here includes this hacked attempt at getting a footer. not successful. -->
 	<!-- http://stackoverflow.com/a/689290/72070 -->
 	<style>
@@ -22,6 +18,11 @@
 }
 
 	</style>
+	{% block heads %}{% endblock %}
+</head>
+<body>
+
+	
 	{% block deps %}{% endblock %}
 
 	<div id="body">

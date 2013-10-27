@@ -41,6 +41,10 @@ app.use("/mat", function(req, res){
 })
 
 app.get('/hello', BE_AWESOME)
+app.get('/home', function(req, res){
+	res.locals.user= req.user
+	res.render('home')
+})
 
 //
 // passport
