@@ -7,16 +7,21 @@
 {% block content %}
 
 
+<head
+<link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'> 
+<link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic' rel='stylesheet' type='text/css'>
+
+</head>
+
 <font color="white">
 
-    <p id = "heading"> Ride Snag <br> </p>
+    <p id = "heading"> Ridesnag <br> </p>
  <p id="subheading">   Where are we headed?</p>
 <form>
-<input type="text" name="lastname">
-    <input type="image" src="rainbow.gif" name="image" width="60" height="60">
-  
+<input type="text" name="search" style="height:25px;font-size:14pt;" >
+    <input id= "button" type="image" src="http://s24.postimg.org/6tb7jam0h/search.png" name="image" width="30" height="30">
+    </input>
 </form>
-
 
 user:{{user}} username:{{username}}
 
