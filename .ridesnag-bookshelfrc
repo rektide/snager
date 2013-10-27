@@ -5,7 +5,8 @@
 		"user": "rideapp_test",
 		"password": "password5352",
 		"database": "ridedb_test",
-		"charset": "utf8"
+		"charset": "utf8",
+		"port": 5433
 	},
 	"debug": true
 }
