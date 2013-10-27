@@ -8,7 +8,7 @@ CREATE DATABASE ridedb_test OWNER ridemaster TABLESPACE ridetablespace;
 -- \c ridedb
 
 CREATE EXTENSION hstore;
-CREATE TABLE IF NOT EXISTS "user" (id serial primary key, name text, pass text, created_at timestamp, updated_at timestamp);
+CREATE TABLE IF NOT EXISTS "user" (id serial primary key, name text, pass text, username text, created_at timestamp, updated_at timestamp, e hstore);
 CREATE TYPE trip_state AS ENUM ('wanting', 'offering', 'fulfilled');
 CREATE TABLE IF NOT EXISTS trip (id serial primary key, state trip_state, owner int, fulfiller int, a int, b int, seats int, created_at timestamp, updated_at timestamp, e hstore);
 CREATE TABLE IF NOT EXISTS meet (id serial primary key, text text, lat double precision, lng double precision, created_at timestamp, updated_at timestamp, e hstore);
