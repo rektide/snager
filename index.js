@@ -35,6 +35,11 @@ app.use(express.methodOverride())
 app.use(express.static(__dirname + '/public'))
 app.use(express.session({ secret: 'y0y0dyn3' }))
 
+app.use("/mat", function(req, res){
+	res.locals.user= req.user
+	res.render('login')
+})
+
 
 //
 // passport
@@ -59,7 +64,7 @@ app.use(passport.session())
 //
 //	 curl -v -d "username=bob&password=secret" http://127.0.0.1:3000/login
 app.post('/',
-	passport.authenticate('local', {failureRedirect: '/login', failureFlash: true, successFlash: "welcome!"}), // TODO: use a custom handler that increments a tock for auth events
+	passport.authenticate('local', {failureRedirect: '/mat', failureFlash: true, successFlash: "welcome!"}), // TODO: use a custom handler that increments a tock for auth events
 	function(req, res){
 		res.redirect('/hello')
 	})
