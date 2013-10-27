@@ -1,8 +1,7 @@
 <style>
 body {
-   /* background-image:url('img/tumblr_mmk4duOTOZ1r6ud20o1_1280.jpg');
-    */
-    background-image:url('http://s13.postimg.org/v4vmx7813/tumblr_mqu5qlslfb1qcqto9o1_r8_1280.jpg');
+  
+    background-image:url('/img/tumblr_mqu5qlslfb1qcqto9o1_r8_1280.jpg');
     background-repeat:no-repeat;
     background-size:cover;
    

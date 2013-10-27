@@ -1,0 +1,22 @@
+{% extends "base" %}
+{% block heads %}
+
+{% include "frags/loginstyle" %}
+
+{% endblock %}
+{% block content %}
+
+<div>
+    <img id="login" src="/img/loginlogin.png" > 
+  
+   
+</div>    
+  <form action = "login" class= "centered">
+      <label>user </label><input type="text">
+      <label>key</label><input type = "text">
+      
+  </form>
+<div>
+<img id ="pic" src="/img/imglogo.png">
+</div>
+{% endblock %}
