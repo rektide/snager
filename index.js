@@ -1,19 +1,21 @@
+#!/usr/bin/env node
+
+// global modules
 var express = require('express'),
-	nunjucks = require("nunjucks"),
-	passportModule = require('passport').Passport,
-	passportLocalStrategy = require('./passport-local').Strategy,
-	bookshelf = require('bookshelf')
+  nunjucks = require("nunjucks"),
+  passportModule = require('passport').Passport,
+  bookshelfModule = require('bookshelf')
 
+// appconfig
+var rc= require("rc")("ridesnag",{port: 4004})
 
-//
-// broad configuration directives //
-//
+// local modules
+var passportLocalStrategy = require('./passport-local').Strategy,
+  bookshelf= require("./bookshelf")
 
-var PORT= 4004
 
 
 // build passport module
-
 var passport = new passportModule()
 //passport.use("local", new passportLocalStrategy()) // TODO: define a login strategy
 
@@ -23,25 +25,32 @@ var passport = new passportModule()
 //
 
 var app= express()
-app.configure(function() {
-	//app.set('views', __dirname + '/views')
-	//app.set('view engine', 'ejs')
-	//app.engine('ejs', require('ejs-locals'))
-	app.use(express.logger())
-	app.use(express.cookieParser())
-	app.use(express.bodyParser())
-	app.use(express.methodOverride())
-	app.use(express.session({ secret: 'y0y0dyn3' }))
-	// Initialize Passport!	Also use passport.session() middleware, to support
-	// persistent login sessions (recommended).
-	app.use(passport.initialize())
-	app.use(passport.session())
-	//app.use(app.router) // TODO: build an application
-	app.use(express.static(__dirname + '/public'))
+// configure nunjucks as view engine
+nunjucks.configure('views', { autoescape: true, express: app })
 
-	// CONTROLLED ASSETS ONLY
-	//app.use(ensureAuthenticated)
-})
+//
+// bring pipe online
+//
+
+app.use(express.logger())
+app.use(express.cookieParser())
+app.use(express.bodyParser())
+app.use(express.methodOverride())
+app.use(express.static(__dirname + '/public'))
+app.use(express.session({ secret: 'y0y0dyn3' }))
+// Initialize Passport!	Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize())
+app.use(passport.session())
+//app.use(app.router) // TODO: build an application
+
+//
+// CONTROLLED ASSETS LINE //
+//app.use(ensureAuthenticated)
+//
+
+
+
 
 // Simple route middleware filter to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
@@ -53,52 +62,6 @@ function ensureAuthenticated(req, res, next) {
 	res.redirect('/login')
 }
 
-
-// configure nunjucks as view engine
-nunjucks.configure('views', { autoescape: true, express: app })
-
-// initialize bookshelf
-var orm = bookshelf.initialize({
-	client: 'pg',
-	connection: {
-	host: '127.0.0.1',
-	user: 'ridesnag',
-	password: 'password5352',
-	database: 'ridesnag_test',
-	charset: 'utf8'
-	},
-	debug: true
-})
-
-var User = orm.Model.extend({
-	tableName: 'user',
-	idAttribute: 'id', // TODO: necessary?
-	trips: function () {
-	return this.hasMany(Trip)
-	}
-})
-
-var Trip = orm.Model.extend({
-	tableName: 'trip',
-	idAttribute: 'id', // TODO: necessary?
-	owner: function () {
-	return this.hasOne(User)
-	},
-	start: function () {
-	return this.hasOne(Meet, 'start_id')
-	},
-	destination: function () {
-	return this.hasOne(Meet, 'destination_id')
-	},
-	matches: function () {
-	return this.hasOne(Trip, 'matches_with')
-	},
-})
-
-var Meet = orm.Model.extend({
-	tableName: 'meet',
-	idAttribute: 'id' // TODO: necessary?
-})
 
 
 // user looks at their personalized homepage, sees the trips they are/were associated with
@@ -173,6 +136,6 @@ app.get('/logout', function(req, res){
 })
 
 
-app.listen(PORT, function() {
-	console.log('Express server listening on port '+PORT)
+app.listen(rc.port, function() {
+	console.log('Express server listening on port '+rc.port)
 })

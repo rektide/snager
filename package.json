@@ -11,7 +11,7 @@
 		"url": "git://github.com/rektide/ridesnag.git"
 	},
 	"author": "",
-	"license": "BSD",
+	"license": "",
 	"readmeFilename": "README.md",
 	"gitHead": "f0bb3166ed3d7208a454407b57dc5eb1f017ccda",
 	"bugs": {
@@ -24,6 +24,7 @@
 		"passport-local": "~0.1.6",
 		"leaflet": "~0.6.4",
 		"pg": "~2.8.2",
-		"bookshelf": "~0.5.7"
+		"bookshelf": "~0.5.7",
+		"rc": "~0.3.1"
 	}
 }

@@ -1,0 +1,11 @@
+{
+	"client": "pg",
+	"connection": {
+		"host": "127.0.0.1",
+		"user": "rideapp_test",
+		"password": "password5352",
+		"database": "ridedb_test",
+		"charset": "utf8"
+	},
+	"debug": true
+}
