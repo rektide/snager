@@ -3,45 +3,10 @@
 	<head>
 		<title>A quick app</title>
 
-		<style>
-body {
-   background-image:url('http://s16.postimg.org/e5i830r03/img_9481.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
-background-color:#cccccc;
- 
-}
-form
-{
-    
-position:absolute;
-left:50%;
-top:50%;
-}
-#heading {
-    position:absolute;
-    left:50%;
-    top:150px;
-    
-    font-family:impact, Charcoal, sans-serif; 
-}
-#subheading
-{
-position:absolute;
-left:50%;
-top:200px;
-font-family:Klinic Slab, Book Italic; 
-}
-#button
-{
-position:relative;
-left:-7px;
-top:10px;    
-}
-		</style>
 		<script src="/nunjucks/nunjucks.js"></script>
 		<script src="/templates.js"></script>
 		{% block heads %}{% endblock %}
+
 	</head>
 	<body>
 		<!-- deps -->
