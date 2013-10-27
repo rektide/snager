@@ -52,5 +52,5 @@ module.exports= function(){
 			// authenticated `user`.
 			whenWhenThenNode(findByUsername(username), done)
 		}
-	}
-))
+	)
+}

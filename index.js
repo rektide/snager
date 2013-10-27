@@ -11,10 +11,8 @@ var express = require('express'),
 var rc= require("rc")("ridesnag",{port: 4004})
 
 // local modules
-var passportLocalStrategy = require('./passport-local').Strategy,
+var passportLocalStrategy = require('./passport-local'),
   bookshelf= require("./bookshelf")
-
-
 
 
 //
@@ -24,6 +22,7 @@ var passportLocalStrategy = require('./passport-local').Strategy,
 var app= express()
 // configure nunjucks as view engine
 nunjucks.configure('views', { autoescape: true, express: app })
+
 
 //
 // bring pipe online
@@ -35,12 +34,6 @@ app.use(express.bodyParser())
 app.use(express.methodOverride())
 app.use(express.static(__dirname + '/public'))
 app.use(express.session({ secret: 'y0y0dyn3' }))
-// Initialize Passport!	Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(flash())
-app.use(passport.initialize())
-app.use(passport.session())
-//app.use(app.router) // TODO: build an application
 
 
 //
@@ -50,6 +43,12 @@ app.use(passport.session())
 // build passport module
 var passport = new passportModule()
 passport.use("local", passportLocalStrategy())
+app.use(flash())
+// Initialize Passport!	Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize())
+app.use(passport.session())
+//app.use(app.router) // TODO: build an application
 
 
 // POST /
@@ -85,6 +84,7 @@ app.post('/login', function(req, res, next) {
 })
 */
 
+
 app.get('/logout', function(req, res){
 	req.logout()
 	res.redirect('/')
@@ -96,14 +96,10 @@ app.listen(rc.port, function() {
 })
 
 
-
 //
 // CONTROLLED ASSETS LINE //
 app.use(ensureAuthenticated)
 //
-
-
-
 
 
 // Simple route middleware filter to ensure user is authenticated.
@@ -115,7 +111,6 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) { return next() }
 	res.redirect('/login')
 }
-
 
 
 // user looks at their personalized homepage, sees the trips they are/were associated with
