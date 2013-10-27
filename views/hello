@@ -1,27 +1,16 @@
 {% extends "base" %}
 
 {% block content %}
-
-
-<head>
-
-</head>
-
 <font color="white">
-
-    <p id = "heading"> Ridesnag <br> </p>
- <p id="subheading">   Where are we headed?</p>
-<form>
-<input type="text" name="search" style="height:25px;font-size:14pt;" >
-    <input id= "button" type="image" src="img/search.png" name="image" width="30" height="30">
-    </input>
-</form>
-
-user:{{user}} username:{{username}}
-
+	<p id = "heading">Ridesnag <br></p>
+	<p id="subheading">Where are we headed?</p>
+	<form>
+		<input type="text" name="search" style="height:25px;font-size:14pt;"></input>
+		<input id= "button" type="image" src="/img/search.png" name="image" width="30" height="30"></input>
+	</form>
+</font>
 {% include "frags/leafmap" %}
 {% endblock %}
-
 
 {% block deps %}
 {% include "deps/leaflet" %}
@@ -31,8 +20,7 @@ user:{{user}} username:{{username}}
 {% block heads %}
 <link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'> 
 <link href='http://fonts.googleapis.com/css?family=Vollkorn:400italic' rel='stylesheet' type='text/css'>
-
-		<style>
+<style>
 body {
    background-image:url('img/img_9481.jpg');
     background-repeat:no-repeat;
@@ -69,9 +57,8 @@ position:relative;
 left:-7px;
 top:10px;    
 }
-		</style>
-{% include "frag/mobile-viewlock" %}
-
+</style>
+{% include "frags/mobile-viewlock" %}
 {% endblock %}
 
 
