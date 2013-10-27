@@ -1,9 +1,8 @@
 var express = require('express'),
 	nunjucks = require("nunjucks"),
 	passportModule = require('passport').Passport,
-        passportLocalStrategy = require('./passport-local').Strategy
-
-var bookshelf = require('bookshelf')
+	passportLocalStrategy = require('./passport-local').Strategy,
+	bookshelf = require('bookshelf')
 
 
 //
@@ -60,45 +59,45 @@ nunjucks.configure('views', { autoescape: true, express: app })
 
 // initialize bookshelf
 var orm = bookshelf.initialize({
-    client: 'pg',
-    connection: {
+	client: 'pg',
+	connection: {
 	host: '127.0.0.1',
 	user: 'ridesnag',
 	password: 'password5352',
 	database: 'ridesnag_test',
 	charset: 'utf8'
-    },
-    debug: true
+	},
+	debug: true
 })
 
 var User = orm.Model.extend({
-    tableName: 'user',
-    idAttribute: 'id', // TODO: necessary?
-    trips: function () {
+	tableName: 'user',
+	idAttribute: 'id', // TODO: necessary?
+	trips: function () {
 	return this.hasMany(Trip)
-    }
+	}
 })
 
 var Trip = orm.Model.extend({
-    tableName: 'trip',
-    idAttribute: 'id', // TODO: necessary?
-    owner: function () {
+	tableName: 'trip',
+	idAttribute: 'id', // TODO: necessary?
+	owner: function () {
 	return this.hasOne(User)
-    },
-    start: function () {
+	},
+	start: function () {
 	return this.hasOne(Meet, 'start_id')
-    },
-    destination: function () {
+	},
+	destination: function () {
 	return this.hasOne(Meet, 'destination_id')
-    },
-    matches: function () {
+	},
+	matches: function () {
 	return this.hasOne(Trip, 'matches_with')
-    },
+	},
 })
 
 var Meet = orm.Model.extend({
-    tableName: 'meet',
-    idAttribute: 'id' // TODO: necessary?
+	tableName: 'meet',
+	idAttribute: 'id' // TODO: necessary?
 })
 
 
@@ -106,8 +105,8 @@ var Meet = orm.Model.extend({
 // select * from `user`, `trip` where name = 'bob'
 //console.log('selecting bob')
 //new User({name: 'bob'}).fetch({
-//    withRelated: ['trips.start', 'trips.destination'],
-//    require: true
+//	withRelated: ['trips.start', 'trips.destination'],
+//	require: true
 //}).then(function (model) {
 //  console.log(JSON.stringify(model))
 //})
