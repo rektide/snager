@@ -24,6 +24,16 @@ CREATE TABLE users(???);
 CREATE TABLE locations(???);
 ```
 
+# Running
+
+`node index` runs the server, but! It has to be tended to & restarted with changes.
+
+`sudo npm install -g pm2` installs pm2 onto your system: a utility which enables Node to be kept up to date with changes
+
+After installing, this keeps the app running & fresh:
+
+`pm2 dev index.js`
+
 # PostgreSQL
 
 ## postgresql.conf
