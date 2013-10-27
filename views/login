@@ -1,0 +1,25 @@
+{% extends "base" %}
+
+{% block heads %}
+{% include "frags/style-mat" %}
+{% endblock %}
+
+{% block content %}
+<form name="login" action="/" method="post" >
+	<div id="mat0">
+		<label for="matuser">User</label> 
+	</div>
+	<div id="mat1">
+		<input id="matuser" name="username" type="text"></input>
+	</div>
+	<div id="mat2">
+		<label for="matpass">Passphrase</label>
+	</div>
+	<div id="mat3">
+		<input id="matpass" name="password" type="text"></input>
+	</div>
+	<div id="mat4">
+		<input type="submit" name="snagon" value="Snag on"></input>
+	</div>
+</form>
+{% endblock %}

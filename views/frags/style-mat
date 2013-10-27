@@ -1,0 +1,9 @@
+<style>
+{% set x = 16.18 %}
+{% for i in range(6) %}
+#mat{{ i }} { clear:both; float:left; margin-left: {{ x + (i * 6.72) }}%; }
+{% endfor %}
+
+#top { clear: both; }
+#main { clear: both; }
+</style>
