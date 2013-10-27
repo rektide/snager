@@ -40,6 +40,7 @@ app.use("/mat", function(req, res){
 	res.render('login')
 })
 
+app.get('/hello', BE_AWESOME)
 
 //
 // passport
