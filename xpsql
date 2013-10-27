@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 var rc= require("rc")("ridesnag-bookshelf")
 var moar= Array.prototype.splice.call(process.argv,2).join(" ")
-console.log("psql -U"+rc.connection.user+" -h"+rc.connection.host+" -p"+rc.connection.port+" -W")
+console.log("psql -U"+rc.connection.user+" -h"+rc.connection.host+" -p"+rc.connection.port+" -d"+rc.connection.database+" -W")
