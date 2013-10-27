@@ -1,14 +1,87 @@
 <div id="map" style="height: 200px"></div>
 <script type="text/javascript">
-var mapContext= (function(){
-	this.map = L.map("map").setView([51.505, -0.09], 13)
-	L.tileLayer('http://{s}.tile.cloudmade.com/d3734e125a1243969a26964e480804df/997/256/{z}/{x}/{y}.png', {
-	  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery ? <a href="http://cloudmade.com">CloudMade</a>',
-	  maxZoom: 18
-	}).addTo(this.map)
+var mapContext= (function(opts){
+this.opts= opts
 
+//
+// make a map
+//
+
+(function makeMap(){
+	// make map
+	this.map = L.map("map").setView([42.359115,-71.057982], 13)
+
+	// layer
+	var tileLayer = L.tileLayer("http://{s}.tile.cloudmade.com/"+this.key+"/997/256/{z}/{x}/{y}.png", this.opts.map)
+	tileLayer.addTo(this.map)
+
+	// fullscreen setup
 	this.fullScreen = new L.Control.FullScreen()
 	this.map.addControl(this.fullScreen)
+
 	return this
-}).call({})
+}).call(this)
+
+//
+// routing
+// http://cloudmade.com/documentation/routing
+//
+
+// cloudmade invented a nonsense js format, convert it into useful.
+var convertCloudRoute= (function(response){
+	var point, route, points = []
+	for (var i=0; i<response.route_geometry.length; i++)
+	{
+		point = new L.LatLng(response.route_geometry[i][0] , response.route_geometry[i][1])
+		points.push(point)
+	}
+	route= new L.Polyline(points, this.opts.route)
+	return route
+	//.addTo(map)
+	//route.bringToFront()
+}).bind(this)
+
+// load url
+function addScript(url){
+	var script= document.createElement('script')
+	script.type="text/javascript"
+	script.src= url
+	document.getElementsByTagName('head')[0].appendChild(script)
+}
+
+// get a random callback name
+function makeCallbackName(fn){
+	var n= "cb"+Math.pow(2, 53)
+	window[n] = fn
+	return n
+}
+
+this.addRoute= (function addRoute(a,b,color){
+	if(arguments.length == 5){
+		a= new L.LatLng(a,b)
+		b= new L.LatLng(arguments[2],arguments[3])
+		color= arguments[4]
+	}
+	var cb= makeCallbackName((function(response){ // how does order realize to painting?
+		convertCloudRoute(response).addTo(this.map)
+		new L.Marker(b).addTo(this.map)
+		new L.Marker(a).addTo(this.map)
+	}).bind(this))
+     addScript("http://routes.cloudmade.com/"+this.key+"/api/0.3/"+a.lat+","+a.lng+","+b.lat+","+b.lng+'/car.js?callback='+cb)
+}).bind(this)
+
+
+})({
+	key: "d3734e125a1243969a26964e480804df",
+	route: {
+	  weight: 3,
+	  opacity: 0.5,
+	  smoothFactor: 1
+	},
+	map: {
+	  attribution: "Map data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery ? <a href='http://cloudmade.com'>CloudMade</a>",
+	  maxZoom: 18
+	}
+})
+
 </script>
