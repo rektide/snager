@@ -1,0 +1,28 @@
+<style>
+#login{
+	position:relative;
+    left:50%;
+}
+#pic{
+
+}
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+input {
+  display: inline-block;
+  float: left;
+}
+.centered{
+position: fixed;
+top:50%;
+left:50%:
+margin-top: -50px;
+margin-left:-100px;
+text-align:center;
+}
+</style>

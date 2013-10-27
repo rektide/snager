@@ -1,25 +1,22 @@
 {% extends "base" %}
-
 {% block heads %}
-{% include "frags/style-mat" %}
-{% endblock %}
 
+{% include "frags/loginstyle" %}
+
+{% endblock %}
 {% block content %}
-<form name="login" action="/" method="post" >
-	<div id="mat0">
-		<label for="matuser">User</label> 
-	</div>
-	<div id="mat1">
-		<input id="matuser" name="username" type="text"></input>
-	</div>
-	<div id="mat2">
-		<label for="matpass">Passphrase</label>
-	</div>
-	<div id="mat3">
-		<input id="matpass" name="password" type="text"></input>
-	</div>
-	<div id="mat4">
+
+<div>
+    <img id="login" src="/img/loginlogin.png" > 
+  
+   
+</div>    
+  <form action = "login" class= "centered">
+      <label>user </label><input type="text" name="username">
+      <label>key</label><input type = "text" name="password">
 		<input type="submit" name="snagon" value="Snag on"></input>
-	</div>
-</form>
+  </form>
+<div>
+<img id ="pic" src="/img/imglogo.png">
+</div>
 {% endblock %}

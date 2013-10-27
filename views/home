@@ -7,13 +7,13 @@
 {% block content %}
 
 
-<div> <img src="http://s22.postimg.org/ua0hvvk6p/Ridesnaglogo.png" > 
+<div> <img src="/img/Ridesnaglogo.png" > 
     </div>
 <form align="center">
 
 <font size="6"><font color="white">to <input type="text" name="to" style="height:25px;font-size:14pt;">
 <font size="6">from <input type="text" name="from" style="height:25px;font-size:14pt;">
-    <input id= "search" type="image" src="http://s24.postimg.org/6tb7jam0h/search.png" name="image" width="30" height="30">
+    <input id= "search" type="image" src="/img/search.png" name="image" width="30" height="30">
     </input>
 </input>
 </form>
@@ -22,7 +22,7 @@
 <!--        
 <input id= "move" type="datetime-local" name="ridetime" style="height:35px;font-size:16pt;" >
  -->           
- <input id= "button" type="image" src="http://s21.postimg.org/z1dyx1g2f/offerbutt.png" name="image" width="1000" height="80">
+ <input id= "button" type="image" src="/img/offerbutt.png" name="image" width="1000" height="80">
  </p>
       <body>           
 <div>
