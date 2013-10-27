@@ -45,10 +45,10 @@ function _deglom1(fn){
 passport.use(new LocalStrategy(
 	function(username, password, done) {
 			
-			// Find the user by username.	If there is no user with the given
-			// username, or the password is not correct, set the user to `false` to
-			// indicate failure and set a flash message.	Otherwise, return the
-			// authenticated `user`.
-			whenWhenThenNode(findByUsername(username), done)
+		// Find the user by username.	If there is no user with the given
+		// username, or the password is not correct, set the user to `false` to
+		// indicate failure and set a flash message.	Otherwise, return the
+		// authenticated `user`.
+		whenWhenThenNode(findByUsername(username), done)
 	}
 ))

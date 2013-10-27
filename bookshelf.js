@@ -11,13 +11,13 @@ var rel= module.exports.WITH_RELATED= {}
 
 // User
 var User = orm.Model.extend({
-	tableName: 'user',
-	idAttribute: 'id', // TODO: necessary?
+	tableName: "user",
+	idAttribute: "id", // TODO: necessary?
 	timestamp: true,
-	username: 'username',
-	name: 'name',
+	username: "username",
+	name: "name",
 	trips: function(){
-		return this.hasMany(Trip, 'owner')
+		return this.hasMany(Trip, "owner")
 	},
 	rate_gotten: function(){
 		return this.belongsTo(Rate, "ratee")
@@ -35,10 +35,10 @@ rel.User= ["trips"] // RATES NOT INCLUDED
 
 // Trip
 var Trip = orm.Model.extend({
-	tableName: 'trip',
-	idAttribute: 'id', // TODO: necessary?
+	tableName: "trip",
+	idAttribute: "id", // TODO: necessary?
 	timestamp: true,
-	state: 'state',
+	state: "state",
 	owner: function () {
 		return this.hasOne(User, "owner")
 	},
@@ -64,17 +64,17 @@ rel.Trip= ["fulfils", "fulfiller", "a", "b"]
 
 // Meet
 var Meet = orm.Model.extend({
-	tableName: 'meet',
-	idAttribute: 'id', // TODO: necessary?
+	tableName: "meet",
+	idAttribute: "id", // TODO: necessary?
 	timestamp: true,
-	text: 'text',
-	lat: 'lat',
-	lng: 'lng',
+	text: "text",
+	lat: "lat",
+	lng: "lng",
 	trip: function() {
 		return this.belongsToOne()
 	},
-	t_s: 't_s',
-	t_e: 't_e'
+	t_s: "t_s",
+	t_e: "t_e"
 })
 var Meets= orm.Collection.extend({
 	model: Meet
@@ -85,8 +85,8 @@ rel.Meet= ["Trip"]
 
 // Rating
 var Rating = orm.Model.extend({
-	tableName: 'rating',
-	idAttribute: 'id', // TODO: necessary?
+	tableName: "rating",
+	idAttribute: "id", // TODO: necessary?
 	timestamp: true,
 	rater: function(){
 		return this.hasOne(Trip, "rater")
@@ -94,7 +94,7 @@ var Rating = orm.Model.extend({
 	ratee: function(){
 		return this.hasOne(Trip, "ratee")
 	},
-	general: 'general'
+	general: "general"
 })
 var Ratings= orm.Collection.extend({
 	model: Rating
