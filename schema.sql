@@ -23,6 +23,8 @@ GRANT ALL PRIVILEGES ON TABLE meet TO rideapp_test;
 GRANT ALL PRIVILEGES ON TABLE rating TO rideapp_test;
 GRANT ALL PRIVILEGES ON TABLE "user" TO rideapp_test;
 
+INSERT INTO "user" (name, pass, username) VALUES ('Matt Fowle', 'mfff', 'mfowle');
+
 -- or
 -- \c ridedb
 --CREATE USER rideapp WITH PASSWORD 'h00plaf00';
