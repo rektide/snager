@@ -18,7 +18,6 @@ this.opts= opts;
 	// fullscreen setup
 	this.fullScreen = new L.Control.Fullscreen()
 	this.map.addControl(this.fullScreen)
-console.log("MAP!")
 
 	return this
 }).call(this)
