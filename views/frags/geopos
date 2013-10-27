@@ -1,8 +1,8 @@
 <script type="text/javascript">
 var geo = (function(opts){
 	this.opts= opts
-	this.pos= navigator.geolocation.getCurrentPosition(function(pos){
-	}, functions(err){}, this.opts)
+	this.pos= navigator.geolocation.getCurrentPosition(function(p){
+	}, function(err){}, this.opts)
 	return this
 }).call({},{
     maximumAge: 5000,
