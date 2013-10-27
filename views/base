@@ -5,7 +5,7 @@
 
 		<style>
 body {
-   background-image:url('http://s16.postimg.org/e5i830r03/img_9481.jpg');
+   background-image:url('img/img_9481.jpg');
     background-repeat:no-repeat;
     background-size:cover;
 background-color:#cccccc;
