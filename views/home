@@ -1,0 +1,21 @@
+{% extends "base" %}
+
+{% block content %}
+
+<form>
+from: <input name="from" />
+to: <input name="to" />
+</from>
+
+{% for trip in trips %}
+
+<div outline="2px">
+<p class="title">{{trip.owner_name}}</p>
+{{trip.owner}}
+{{trip.start}}
+{{trip.end}}
+</div>
+
+{% endfor %}
+
+{% endblock %}
