@@ -12,12 +12,13 @@ this.opts= opts;
 	this.map = L.map("map").setView([42.359115,-71.057982], 13)
 
 	// layer
-	var tileLayer = L.tileLayer("http://{s}.tile.cloudmade.com/"+this.key+"/997/256/{z}/{x}/{y}.png", this.opts.map)
+	var tileLayer = L.tileLayer("http://{s}.tile.cloudmade.com/"+this.opts.key+"/997/256/{z}/{x}/{y}.png", this.opts.map)
 	tileLayer.addTo(this.map)
 
 	// fullscreen setup
 	this.fullScreen = new L.Control.Fullscreen()
 	this.map.addControl(this.fullScreen)
+console.log("MAP!")
 
 	return this
 }).call(this)
@@ -67,7 +68,7 @@ this.addRoute= (function(a,b,color){
 		new L.Marker(b).addTo(this.map)
 		new L.Marker(a).addTo(this.map)
 	}).bind(this))
-     addScript("http://routes.cloudmade.com/"+this.key+"/api/0.3/"+a.lat+","+a.lng+","+b.lat+","+b.lng+"/car.js?callback="+cb)
+     addScript("http://routes.cloudmade.com/"+this.opts.key+"/api/0.3/"+a.lat+","+a.lng+","+b.lat+","+b.lng+"/car.js?callback="+cb)
 }).bind(this)
 
 
