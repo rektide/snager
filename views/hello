@@ -22,11 +22,11 @@ user:{{user}} username:{{username}}
 
 {% block deps %}
 {% include "deps/leaflet" %}
-{% include "frag/geopos" %}
+{% include "frags/geopos" %}
 {% endblock %}
 
 {% block heads %}
-{% include "frag/mobile-viewlock" %}
+{% include "frags/mobile-viewlock" %}
 {% endblock %}
 
 
