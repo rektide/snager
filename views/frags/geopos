@@ -1,6 +1,11 @@
 <script type="text/javascript">
-var geo = (function(){
+var geo = (function(opts){
+	this.opts= opts
 	this.pos= navigator.geolocation.getCurrentPosition(function(pos){
 	}, functions(err){}, this.opts)
-}).call({opts:{maximumAge: 5000, enableHighAccuracy: true})
+	return this
+}).call({},{
+    maximumAge: 5000,
+    enableHighAccuracy: true
+})
 </script>
