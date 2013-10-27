@@ -2,6 +2,7 @@
 
 {% block deps %}
 {% include "deps/leaflet" %}
+{% include "frag/mobile-viewlock" %}
 {% include "frag/geopos" %}
 {% endblock %}
 
