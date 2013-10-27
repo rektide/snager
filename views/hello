@@ -1,7 +1,20 @@
 {% extends "base" %}
 
 {% block content %}
-Hello, welcome to RS! user:{{user}} username:{{username}}
+
+
+<font color="white">
+
+    <p id = "heading"> Ride Snag <br> </p>
+ <p id="subheading">   Where are we headed?</p>
+<form>
+<input type="text" name="lastname">
+    <input type="image" src="rainbow.gif" name="image" width="60" height="60">
+  
+</form>
+
+
+user:{{user}} username:{{username}}
 
 {% include "frags/leafmap" %}
 {% endblock %}
