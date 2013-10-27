@@ -28,7 +28,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 function whenWhenThenNode(w,done){
-	when(w).fail(done).then(_deglom1)
+	when(w).then(_deglom1,done)
 }
 
 function _deglom1(fn){
